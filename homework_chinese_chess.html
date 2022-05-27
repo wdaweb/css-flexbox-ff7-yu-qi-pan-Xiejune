@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .side {
+      /* 文字垂直顯示 */
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-family: '標楷體';
+      font-size: 2.5rem;
+      padding: 0 2rem;
+    }
+
+    #container {
+      width: 40%;
+      height: calc(100vw * 0.4);
+      border: 2px solid #000;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #top {
+      height: calc(100% / 9 * 4);
+      border: 1px solid #000;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    #top>div {
+      height: 25%;
+      border: 1px solid #000;
+    }
+
+    #bottom {
+      height: calc(100% / 9 * 4);
+      border: 1px solid #000;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    #bottom>div {
+      height: 25%;
+      border: 1px solid #000;
+    }
+
+    /* 旗子的兩種樣式 */
+    /* 黑旗 */
+    .style-black div {
+      border-radius: 50%;
+      border: 1px solid #000;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: '標楷體';
+      font-size: 2.5rem;
+    }
+
+    /* 紅旗 */
+    .style-red div {
+      border-radius: 50%;
+      border: 1px solid #000;
+      background: #fff;
+      color: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: '標楷體';
+      font-size: 2.5rem;
+    }
+
+    /* 第一和三層的旗子樣式寬/高 和 第二層的旗子樣式寬高 */
+    /* 第一和三層 */
+    .style_wh_big div {
+      width: calc(100% / 10 / 10 * 9);
+      height: 85%;
+    }
+
+    /* 第二層 */
+    .style_wh_small div {
+      width: 11%;
+      height: 85%;
+    }
+
+    /* 旗子內部排版 */
+    .inside_between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 第一和三層的寬/高 和 第二層的寬/高 */
+    /* 第一漢三層 */
+    .outside_110 {
+      height: 25%;
+      width: 110%;
+    }
+
+    /* 第二層 */
+    .outside_85 {
+      height: 25%;
+      width: 85%;
+    }
+
+    /* 上層的上排旗子定位 */
+    #top .one {
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(-5%, -50%);
+    }
+
+    /* 上層的中排旗子定位 */
+    #top .two {
+      border: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* 上層的下排旗子定位 */
+    #top .three {
+      border: none;
+      position: absolute;
+      top: 75%;
+      left: 0;
+      transform: translate(-5%, -50%);
+    }
+
+    /* 下層的上排旗子定位 */
+    #bottom .one {
+      border: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform: translate(-5%, 50%);
+    }
+
+    /* 下層的中排旗子定位 */
+    #bottom .two {
+      border: none;
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
+
+    /* 下層的下排旗子定位 */
+    #bottom .three {
+      border: none;
+      position: absolute;
+      bottom: 75%;
+      left: 0;
+      transform: translate(-5%, 50%);
+    }
+
+    /* 畫斜線 - 右下 */
+    #top :nth-child(13),
+    #top :nth-child(18),
+    #bottom :nth-child(15),
+    #bottom :nth-child(20) {
+      position: relative;
+    }
+
+    #top :nth-child(13)::before,
+    #top :nth-child(18)::before,
+    #bottom :nth-child(15)::before,
+    #bottom :nth-child(20)::before {
+      content: '';
+      display: inline-block;
+      width: 135%;
+      height: 0.5px;
+      border-top: 1px solid #000;
+      position: absolute;
+      top: 0;
+      left: 1%;
+      transform-origin: left top;
+      transform: rotate(41deg);
+    }
+
+    /* 畫斜線 - 左下 */
+    #top :nth-child(14),
+    #top :nth-child(17),
+    #bottom :nth-child(16),
+    #bottom :nth-child(19) {
+      position: relative;
+    }
+
+    #top :nth-child(14)::before,
+    #top :nth-child(17)::before,
+    #bottom :nth-child(16)::before,
+    #bottom :nth-child(19)::before {
+      content: '';
+      display: inline-block;
+      width: 135%;
+      height: 0.5px;
+      border-top: 1px solid #000;
+      position: absolute;
+      top: 0;
+      right: 1%;
+      transform-origin: right top;
+      transform: rotate(-41deg);
+    }
+
+    /* 楚河 漢界 */
+    #center {
+      height: calc(100% / 9);
+      border-left: 2px solid #000;
+      border-right: 2px solid #000;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 3rem;
+      font-family: '標楷體';
+    }
+  </style>
+</head>
+<body>
+  <p class="side">棋盤裡，車無輪，馬無疆，叫聲將軍堤防堤防</p>
+  <div id="container">
+    <div id="top">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="one style-black style_wh_big inside_between outside_110">
+        <div><p>車</p></div>
+        <div><p>馬</p></div>
+        <div><p>象</p></div>
+        <div><p>士</p></div>
+        <div><p>將</p></div>
+        <div><p>士</p></div>
+        <div><p>象</p></div>
+        <div><p>馬</p></div>
+        <div><p>車</p></div>
+      </div>
+      <div class="two style-black style_wh_small inside_between outside_85">
+        <div><p>包</p></div>
+        <div><p>包</p></div>
+      </div>
+      <div class="three style-black style_wh_big inside_between outside_110">
+        <div><p>卒</p></div>
+        <div><p>卒</p></div>
+        <div><p>卒</p></div>
+        <div><p>卒</p></div>
+        <div><p>卒</p></div>
+      </div>
+    </div>
+    <div id="center">
+      <p>楚河</p><p>漢界</p>
+    </div>
+    <div id="bottom">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div class="one style-red style_wh_big inside_between outside_110">
+        <div><p>俥</p></div>
+        <div><p>傌</p></div>
+        <div><p>相</p></div>
+        <div><p>仕</p></div>
+        <div><p>帥</p></div>
+        <div><p>仕</p></div>
+        <div><p>相</p></div>
+        <div><p>傌</p></div>
+        <div><p>俥</p></div>
+      </div>
+      <div class="two style-red style_wh_small inside_between outside_85">
+        <div><p>炮</p></div>
+        <div><p>炮</p></div>
+      </div>
+      <div class="three style-red style_wh_big inside_between outside_110">
+        <div><p>兵</p></div>
+        <div><p>兵</p></div>
+        <div><p>兵</p></div>
+        <div><p>兵</p></div>
+        <div><p>兵</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="side">圖畫裡，龍不吟，虎不嘯，小小書僮可笑可笑</p>
+</body>
+</html>
